@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <style>
+    .box {
+      border: 2px solid #39972c;
+      padding: 50px;
+      margin-top: 50px;
+      position: relative;
+    }
+
+    .textInput {
+      border: 2px solid black;
+      padding: 10px;
+      box-sizing: border-box;
+      width: 50%;
+      margin-bottom: 10px;
+    }
+
+    .okayButton {
+      padding: 5px 10px;
+    }
+
+    .bigBox {
+      border: 2px solid #39972c;
+      padding: 50px;
+      margin-top: 50px;
+      position: relative;
+    }
+
+    .deleteButton {
+      padding: 5px 10px;
+    }
+  </style>
+  <body>
+    <h1>To Do Lists</h1>
+    <button onClick="toggleFirstBox()">plus</button>
+    <div id="messageContainer" class="box" style="display: none">
+      <input id="inputField" class="textInput" style="display: none">
+      <div>
+        <button id="okayButton" onClick="createNewBox()">Okay</button>
+      </div>
+    </div>
+
+    <script>
+      var firstBox = false;
+
+      function toggleFirstBox() {
+        var messageContainer = document.getElementById("messageContainer");
+        var inputField = document.getElementById("inputField");
+        var okayButton = document.getElementById("okayButton");
+
+        if (messageContainer.style.display === "none") {
+          messageContainer.style.display = "block";
+          inputField.style.display = "block";
+          okayButton.style.display = "block";
+        } else {
+          messageContainer.style.display = "none";
+          inputField.style.display = "none";
+          okayButton.style.display = "none";
+        }
+      }
+
+      function createNewBox() {
+        var inputField = document.getElementById("inputField");
+        var name = inputField.value;
+
+        var newBox = document.createElement("div");
+        newBox.classList.add("bigBox");
+        newBox.innerText = name;
+
+        var deleteButton = document.createElement("button");
+        deleteButton.classList.add("deleteButton");
+        deleteButton.innerText = "Delete";
+        deleteButton.addEventListener("click", function () {
+          newBox.remove();
+        });
+        newBox.appendChild(deleteButton);
+
+        document.body.appendChild(newBox);
+        inputField.value = "";
+        firstBox = true;
+      }
+    </script>
+  </body>
+</html>
